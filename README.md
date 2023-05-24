@@ -12,7 +12,7 @@ Beyoncé is one of the most influential and celebrated artists of our time. Her 
 
 To answer the question posed above, the following steps were undertaken:
 
-1. **Data Collection**: A dataset comprising 92 Beyoncé songs was compiled, ensuring a comprehensive representation of her discography. This dataset served as the foundation for our analysis.
+1. **Data Collection**: A [dataset comprising 92 Beyoncé songs](https://www.kaggle.com/datasets/hillaryosei/beyonce-lyrics) was created and compiled by myself, ensuring a comprehensive representation of her discography. This dataset served as the foundation for our analysis.
 
 2. **Data Preprocessing**: The dataset was cleaned and preprocessed to ensure accurate results. This involved removing any irrelevant information, handling missing data (if any), and standardizing the format for further analysis.
 
