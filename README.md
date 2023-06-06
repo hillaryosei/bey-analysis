@@ -1,6 +1,6 @@
 # Beyoncé Song Analysis
 
-This project aims to conduct sentiment analysis and natural language processing (NLP) on a dataset of 92 Beyoncé songs. By leveraging Python libraries such as Pandas, NumPy, and Jupyter Notebook, we delve into Beyoncé's discography to explore the development of significant themes throughout her musical career. The findings are then visualized using Matplotlib, providing an insightful representation of the lyrical content and sentiment in her songs.
+This project aims to conduct sentiment analysis and natural language processing (NLP) on a dataset of 92 Beyoncé songs. By leveraging Python libraries such as Pandas, NumPy, and Jupyter Notebook, I delve into Beyoncé's discography to explore the development of significant themes throughout her musical career. The findings are then visualized using Matplotlib, providing an insightful representation of the lyrical content and sentiment in her songs.
 
 ## Problem Statement
 
