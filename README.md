@@ -109,6 +109,7 @@ From romantic vulnerability → confidence → self-defined independence
 │   ├── beyonce_lyrics.csv       # Dataset containing Beyoncé's song lyrics
 │   ├── bey-lyric-analysis.ipynb  # Jupyter Notebook with the analysis code
 ├── README.md                   # Project documentation (you are here)
+├── bey-albums.jpg             # Cover image for README
 ```
 
 ## Getting Started
