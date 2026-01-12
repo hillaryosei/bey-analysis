@@ -146,7 +146,7 @@ jupyter notebook
 ## Future Improvements
 * Album-level rather than year-level aggregation
 * Interactive visualization (Plotly / Streamlit)
-* Added Cowboy Carter album to the analysis
+* Add Cowboy Carter album to the analysis
 
 ## Disclaimer
 Lyrics are used for analytical and educational purposes only.
