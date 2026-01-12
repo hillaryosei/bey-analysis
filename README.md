@@ -1,50 +1,114 @@
-# Beyoncé Song Analysis
+# Beyoncé Lyrics Theme Analysis (2003-2022)
 
-This project aims to conduct sentiment analysis and natural language processing (NLP) on a dataset of 92 Beyoncé songs. By leveraging Python libraries such as Pandas, NumPy, and Jupyter Notebook, I delve into Beyoncé's discography to explore the development of significant themes throughout her musical career. The findings are then visualized using Matplotlib, providing an insightful representation of the lyrical content and sentiment in her songs.
+This project applies natural language processing and unsupervised machine learning to analyze how Beyoncé’s lyrical themes evolve across her career. Using TF-IDF vectorization and Non-Negative Matrix Factorization (NMF), I identify dominant lyrical themes and track their prevalence over time.
 
-## Problem Statement
+The goal of this project is both exploratory (What themes and sentiments emerge naturally from the lyrics?) and analytical (How do those themes shift across albums and eras?).
 
-Beyoncé is one of the most influential and celebrated artists of our time. Her music resonates with millions of fans worldwide, and her lyrics often touch upon a wide range of subjects, from love and empowerment to social issues and personal experiences. However, analyzing such a vast collection of songs manually is a time-consuming and tedious task. Therefore, the project addresses the following question:
+## Project Overview
 
-**What are the significant themes and sentiments conveyed in Beyoncé's discography, and how have they evolved over time?**
+* **Dataset:** Line-level Beyoncé lyrics (grouped into full songs), [created and compiled by myself](https://www.kaggle.com/datasets/hillaryosei/beyonce-lyrics)
+* **Songs analyzed:** 92 songs
+* **Albums covered:** 7
+* **Core techniques:**
+    * Text preprocessing
+    * TF-IDF vectorization
+    * NMF topic modeling
+    * Temporal aggregation & visualization
+* **Tech stack:**
+    * Python
+    * pandas
+    * numpy
+    * scikit-learn
+    * nltk
+    * matplotlib
+    * Jupyter Notebook
 
-## Approach
+## Data
+The raw dataset contains one row per lyric line with the following fields:
+* `artist`
+* `album`
+* `track_title`
+* `track_num`
+* `lyric`
+* `line`
+* `year`
 
-To answer the question posed above, the following steps were undertaken:
+### Data Preparation Steps
+**1.** Group lyric lines by `track_title`
+**2.** Concatenate llines into full-song lyric documents
+**3.** Retain one row per song with:
+    * full lyrics
+    * release year
 
-1. **Data Collection**: A [dataset comprising 92 Beyoncé songs](https://www.kaggle.com/datasets/hillaryosei/beyonce-lyrics) was created and compiled by myself, ensuring a comprehensive representation of her discography. This dataset served as the foundation for our analysis.
+This transformation allows topic modeling at the song level, rather than treating isolated lyric lines as independent documents.
 
-2. **Data Preprocessing**: The dataset was cleaned and preprocessed to ensure accurate results. This involved removing any irrelevant information, handling missing data (if any), and standardizing the format for further analysis.
+## Methodology
+**1. Text vectorization (TF-IDF)**
+    * Lyrics are converted into numerical feature vectors using TF-IDF
+    * English stopwords are removed
+    * `min_df=0.1` is used to reduce noise from rare terms
+    * Result: each song is represented by its most informative words
 
-3. **Sentiment Analysis**: Using natural language processing techniques, sentiment analysis was performed on the lyrics of each song. This process involved extracting sentiment scores and identifying the overall sentiment conveyed (e.g., positive, negative, or neutral) in the lyrics.
+**2. Topic modeling (NMF)**
+* **Non-Negative Matrix Factorization (NMF)** is applied with 5 components
+* NMF was chosen because:
+    * It produces interpretable, additive topics
+    * Topic weights are non-negative and easy to threshold
+* Top words per topic are inspected and manually labeled
 
-4. **Theme Extraction**: Through text mining and NLP techniques, significant themes were extracted from the lyrics of Beyoncé's songs. This allowed us to identify recurring topics and uncover the dominant subjects explored throughout her discography.
+**Identified themes**
+Based on the highest-weight words per topic, themes are labeled as:
+* Love
+* Heartbreak
+* Sex
+* Party
+* Independence
 
-5. **Data Visualization**: The findings from the sentiment analysis and theme extraction were visualized using Matplotlib. This step enabled us to present the evolution of sentiments and themes over time, providing a visual representation of Beyoncé's lyrical journey.
+**3. Theme presence scoring**
+* Each song receives a score for every theme
+* A theme is considered present if its score ≥ 0.1
+* This converts continuous topic weights into binary indicators (0/1)
+
+This makes it possible to count how many songs per year strongly express each theme.
+
+## Visualization & analysis
+Theme presence is aggregated by release year and visualized as a time series.
+* X-axis: Year (album era)
+* Y-axis: Number of songs expressing a theme
+* Each line: One lyrical theme
+
+This allows direct comparison of thematic emphasis across Beyoncé’s career.
 
 ## Results
+The analysis reveals clear, interpretable trends across time:
 
-The analysis of Beyoncé's discography yielded the following insights:
+# Early career (2003-2006)
+* Love and heartbreak dominate
+* Lyrics emphasize romance, vulnerability, and relationship dynamics
+* Independence appears less frequently and usually alongside love themes
 
-- **Sentiment Analysis**: The sentiment analysis revealed the emotional range conveyed in Beyoncé's songs. It provided an understanding of the dominant sentiment (positive, negative, or neutral) prevalent in her lyrics, thereby highlighting the emotional tone of her music.
+# Transitional era (2008-2013)
+* Sex and party themes increase
+* Lyrics become more confident and expressive
+* Themes begin to overlap more strongly within songs
 
-- **Theme Extraction**: By identifying recurring themes in Beyoncé's songs, we gained insights into the subjects she explores in her discography. These themes ranged from love and relationships to empowerment, social issues, and personal experiences, showcasing the depth and diversity of her lyrical content.
+# Later career (2016-2022)
+* Independence emerges as one of the most prominent themes
+* Songs increasingly emphasize autonomy, self-worth, power, and identity
+* Party themes remain present, but are often paired with empowerment rather than escapism
 
-## Additional Insights
-
-The project not only sheds light on Beyoncé's discography but also demonstrates the potential applications of sentiment analysis and NLP in analyzing large collections of songs or texts. The methodology employed can be extended to other artists or domains, enabling a deeper understanding of the themes, sentiments, and patterns hidden within textual data.
+# Overall takeaway
+The topic model captures a clear thematic evolution:
+From romantic vulnerability → confidence → self-defined independence
 
 ## Repository Structure
 
 ```
-├── data
-│   ├── beyonce_songs.csv       # Dataset containing Beyoncé's song lyrics
-├── notebooks
-│   ├── beyonce_analysis.ipynb  # Jupyter Notebook with the analysis code
+├── bey-analysis
+│   ├── beyonce_lyrics.csv       # Dataset containing Beyoncé's song lyrics
+│   ├── bey-lyric-analysis.ipynb  # Jupyter Notebook with the analysis code
 ├── README.md                   # Project documentation (you are here)
 ```
-
-Please refer to the Jupyter Notebook file, `beyonce_analysis.ipynb`, in the `notebooks` directory for detailed information on the analysis code and step-by-step procedures.
 
 ## Getting Started
 
@@ -74,10 +138,9 @@ pip install pandas numpy matplotlib jupyter
 jupyter notebook
 ```
 
-5. Open the `beyonce_analysis.ipynb` notebook and run the code cells sequentially.
+5. Open the `bey-lyric-analysis.ipynb` notebook and run the code cells sequentially.
 
-Feel free to modify or adapt the code to suit your specific requirements and explore further insights from the dataset.
 
-## Conclusion
-
-The Beyoncé Song Analysis project provides an in-depth exploration of Beyoncé's discography using sentiment analysis, NLP, and data visualization techniques. By uncovering significant themes and sentiments prevalent in her lyrics, we gain a deeper understanding of her musical journey. The project serves as a testament to the power of data analysis in unraveling the patterns and emotions hidden within artistic expression.
+## Disclaimer
+Lyrics are used for analytical and educational purposes only.
+All rights belong to their respective copyright holders.
