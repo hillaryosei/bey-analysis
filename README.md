@@ -34,22 +34,22 @@ The raw dataset contains one row per lyric line with the following fields:
 * `year`
 
 ### Data Preparation Steps
-**1.** Group lyric lines by `track_title`
-**2.** Concatenate llines into full-song lyric documents
-**3.** Retain one row per song with:
+1. Group lyric lines by `track_title`
+2. Concatenate llines into full-song lyric documents
+3. Retain one row per song with:
     * full lyrics
     * release year
 
 This transformation allows topic modeling at the song level, rather than treating isolated lyric lines as independent documents.
 
 ## Methodology
-**1. Text vectorization (TF-IDF)**
+1. Text vectorization (TF-IDF)
     * Lyrics are converted into numerical feature vectors using TF-IDF
     * English stopwords are removed
     * `min_df=0.1` is used to reduce noise from rare terms
     * Result: each song is represented by its most informative words
 
-**2. Topic modeling (NMF)**
+2. Topic modeling (NMF)
 * **Non-Negative Matrix Factorization (NMF)** is applied with 5 components
 * NMF was chosen because:
     * It produces interpretable, additive topics
@@ -64,7 +64,7 @@ Based on the highest-weight words per topic, themes are labeled as:
 * Party
 * Independence
 
-**3. Theme presence scoring**
+3. Theme presence scoring
 * Each song receives a score for every theme
 * A theme is considered present if its score ≥ 0.1
 * This converts continuous topic weights into binary indicators (0/1)
@@ -82,22 +82,22 @@ This allows direct comparison of thematic emphasis across Beyoncé’s career.
 ## Results
 The analysis reveals clear, interpretable trends across time:
 
-# Early career (2003-2006)
+### Early career (2003-2006)
 * Love and heartbreak dominate
 * Lyrics emphasize romance, vulnerability, and relationship dynamics
 * Independence appears less frequently and usually alongside love themes
 
-# Transitional era (2008-2013)
+### Transitional era (2008-2013)
 * Sex and party themes increase
 * Lyrics become more confident and expressive
 * Themes begin to overlap more strongly within songs
 
-# Later career (2016-2022)
+### Later career (2016-2022)
 * Independence emerges as one of the most prominent themes
 * Songs increasingly emphasize autonomy, self-worth, power, and identity
 * Party themes remain present, but are often paired with empowerment rather than escapism
 
-# Overall takeaway
+### Overall takeaway
 The topic model captures a clear thematic evolution:
 From romantic vulnerability → confidence → self-defined independence
 
