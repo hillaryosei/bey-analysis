@@ -1,4 +1,5 @@
 # Beyoncé Lyrics Theme Analysis (2003-2022)
+![Image of the artist Beyoncé through the many eras of her career. From left to right are: Dangerously In Love, B-Day, I Am...Sasha Fierce, 4, BEYONCÉ, Lemonade, and Renaissance](https://github.com/hillaryosei/bey-analysis/blob/main/bey-albums.jpg)
 
 This project applies natural language processing and unsupervised machine learning to analyze how Beyoncé’s lyrical themes evolve across her career. Using TF-IDF vectorization and Non-Negative Matrix Factorization (NMF), I identify dominant lyrical themes and track their prevalence over time.
 
@@ -140,6 +141,11 @@ jupyter notebook
 
 5. Open the `bey-lyric-analysis.ipynb` notebook and run the code cells sequentially.
 
+
+## Future Improvements
+* Album-level rather than year-level aggregation
+* Interactive visualization (Plotly / Streamlit)
+* Added Cowboy Carter album to the analysis
 
 ## Disclaimer
 Lyrics are used for analytical and educational purposes only.
